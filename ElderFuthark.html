@@ -1,0 +1,818 @@
+<!doctype HTML>
+<html>
+<head>
+	<title>Elder Futhark</title>
+	<meta charset="utf-8">
+	<style type="text/css">
+		body {
+			font-family: 微軟正黑體;
+			font-weight: bold;
+		}
+		input {
+			width:140px;
+		}
+		h1 {
+			font-size: 20px;
+			color: darkslategray;
+		}
+		.wrap {
+			width:300px;
+			height:170px;
+			border:1px solid lightgrey;
+		}
+		.cube {
+			width:100px;
+			height:170px;
+			float:left;
+			text-align:center;
+		}
+		.output {
+			background-color:lightblue; 
+			box-shadow:3px 3px 5px grey;
+			border-radius:3pt;
+			text-align:center;
+			font-size:10pt;
+			width:90px;
+			margin-left:5px;
+		}
+		img{
+			height:60px;
+		}
+		.block {
+			height:200px;
+		}
+		.spread {
+			width:300px;
+			height:258px;
+			background-image:url("https://drive.google.com/file/d/0BzasgLbsqyklVDJDeTZYdGpEcEU");
+		}
+		.spread .cube {
+			height:258px;
+			font-size:10px;
+		}
+		.spread .vcube {
+			width:100px;
+			height:86px;
+		}
+		.spread .output {
+			background-color:lightseagreen; 
+			border-radius:100pt;
+			width:60px;
+			height:60px;
+			margin-left:20px;
+			line-height: 12px;
+		}
+		.spread .block {
+			height:13px;
+			width:100px;
+		}		
+		.spread img {
+			height:46px;
+			padding-top:8px;
+		}
+		.spread .vcube select {
+			width:65px;
+			font-size:10px;
+		}
+		.spread2 {
+			width:320px;
+			height:270px;
+		}
+		.spread2 .cube {
+			height:300px;
+			width:60px;
+		}
+		.spread2 .vcube {
+			width:60px;
+			height:90px;
+		}
+		.spread2 .output {
+			background-color:lightseagreen; 
+			border-radius:50pt;
+			width:50px;
+			height:50px;
+			margin-left:5px;
+			line-height: 12px;
+		}
+		.spread2 img {
+			height:40px;
+			padding-top:5px;
+		}
+		.spread2 .vcube select {
+			width:56px;
+			font-size:9px;
+		}				
+	</style>
+</head>
+<body>
+<!--生日符文計算-->
+<h1>生日符文</h1>
+<hr size="5" width="300" align="left" color="lavender">
+	<form onsubmit="return false" oninput="GetDate()">
+		<p>請輸入年月日</p>
+		<p><input type="date" id="inputdate"></p>
+		<div class="wrap">
+			<div class="cube">
+				<p>核心符文</p>
+				<div class="output"><output id="Rune1"></output></div>
+				<p><img id="runeImg1"></p>
+			</div>
+			<div class="cube">
+				<p>內在符文</p>
+				<div class="output"><output id="Rune2"></output></div>
+				<p><img id="runeImg2"></p>
+			</div>
+			<div class="cube">
+				<p>外在符文</p>
+				<div class="output"><output id="Rune3"></output></div>
+				<p><img id="runeImg3"></p>
+			</div>
+		</div>
+	</form>
+<div class="block"></div>
+<!--個案記錄，類型：關係牌陣-->
+<h1>符文占卜個案紀錄（關係牌陣）</h1>
+<hr size="5" width="300" align="left" color="lavender">
+	<form onsubmit="return false" oninput="GetSpread()">
+	<p>占卜日期：<input type="date">
+	<br>個案編碼：<input placeholder="輸入自訂編號或代碼">
+	<br>問題摘要：<input placeholder="詢問者以及所詢問題">
+	</p>
+	<div class="spread">
+		<div class="cube">
+			<div class="vcube"><div class="block"></div>
+				<div class="output">
+					<img id="spreadRune2">
+					<p>2:自己<br>
+						<select id="sp2">
+							<option value="1">Fehu</option>
+							<option value="2">Uruz</option>
+							<option value="3">Thurisaz</option>
+							<option value="4">Ansuz</option>
+							<option value="5">Raidho</option>
+							<option value="6">Kenaz</option>
+							<option value="7">Gebo</option>
+							<option value="8">Wunjo</option>
+							<option value="9">Hagalaz</option>
+							<option value="10">Naudhiz</option>
+							<option value="11">Isa</option>
+							<option value="12">Jera</option>
+							<option value="13">Eihwaz</option>
+							<option value="14">Perthro</option>
+							<option value="15">Algiz</option>
+							<option value="16">Sowilo</option>
+							<option value="17">Tiwaz</option>
+							<option value="18">Berkano</option>
+							<option value="19">Ehwaz</option>
+							<option value="20">Mannaz</option>
+							<option value="21">Laguz</option>
+							<option value="22">Ingwaz</option>
+							<option value="23">Othila</option>
+							<option value="0">Dagaz</option>
+							<option value="24">Woden</option>
+						</select>
+					</p>
+				</div>
+			</div>
+		</div>
+		<div class="cube">
+			<div class="vcube" style="height:76px;"></div>
+			<div class="vcube" style="height:96px;">
+				<div class="output">
+					<img id="spreadRune4">
+					<p>4:關鍵<br>
+						<select id="sp4">
+							<option value="1">Fehu</option>
+							<option value="2">Uruz</option>
+							<option value="3">Thurisaz</option>
+							<option value="4">Ansuz</option>
+							<option value="5">Raidho</option>
+							<option value="6">Kenaz</option>
+							<option value="7">Gebo</option>
+							<option value="8">Wunjo</option>
+							<option value="9">Hagalaz</option>
+							<option value="10">Naudhiz</option>
+							<option value="11">Isa</option>
+							<option value="12">Jera</option>
+							<option value="13">Eihwaz</option>
+							<option value="14">Perthro</option>
+							<option value="15">Algiz</option>
+							<option value="16">Sowilo</option>
+							<option value="17">Tiwaz</option>
+							<option value="18">Berkano</option>
+							<option value="19">Ehwaz</option>
+							<option value="20">Mannaz</option>
+							<option value="21">Laguz</option>
+							<option value="22">Ingwaz</option>
+							<option value="23">Othila</option>
+							<option value="0">Dagaz</option>
+							<option value="24">Woden</option>
+						</select>
+					</p>
+				</div>
+			</div>
+			<div class="vcube"><div class="block"></div>
+				<div class="output">
+					<img id="spreadRune1">
+					<p>1:現況<br>
+						<select id="sp1">
+							<option value="1">Fehu</option>
+							<option value="2">Uruz</option>
+							<option value="3">Thurisaz</option>
+							<option value="4">Ansuz</option>
+							<option value="5">Raidho</option>
+							<option value="6">Kenaz</option>
+							<option value="7">Gebo</option>
+							<option value="8">Wunjo</option>
+							<option value="9">Hagalaz</option>
+							<option value="10">Naudhiz</option>
+							<option value="11">Isa</option>
+							<option value="12">Jera</option>
+							<option value="13">Eihwaz</option>
+							<option value="14">Perthro</option>
+							<option value="15">Algiz</option>
+							<option value="16">Sowilo</option>
+							<option value="17">Tiwaz</option>
+							<option value="18">Berkano</option>
+							<option value="19">Ehwaz</option>
+							<option value="20">Mannaz</option>
+							<option value="21">Laguz</option>
+							<option value="22">Ingwaz</option>
+							<option value="23">Othila</option>
+							<option value="0">Dagaz</option>
+							<option value="24">Woden</option>
+						</select>
+					</p>
+				</div>
+			</div>
+		</div>
+		<div class="cube">
+			<div class="vcube"><div class="block"></div>
+				<div class="output">
+					<img id="spreadRune3">
+					<p>3:對方<br>
+						<select id="sp3">
+							<option value="1">Fehu</option>
+							<option value="2">Uruz</option>
+							<option value="3">Thurisaz</option>
+							<option value="4">Ansuz</option>
+							<option value="5">Raidho</option>
+							<option value="6">Kenaz</option>
+							<option value="7">Gebo</option>
+							<option value="8">Wunjo</option>
+							<option value="9">Hagalaz</option>
+							<option value="10">Naudhiz</option>
+							<option value="11">Isa</option>
+							<option value="12">Jera</option>
+							<option value="13">Eihwaz</option>
+							<option value="14">Perthro</option>
+							<option value="15">Algiz</option>
+							<option value="16">Sowilo</option>
+							<option value="17">Tiwaz</option>
+							<option value="18">Berkano</option>
+							<option value="19">Ehwaz</option>
+							<option value="20">Mannaz</option>
+							<option value="21">Laguz</option>
+							<option value="22">Ingwaz</option>
+							<option value="23">Othila</option>
+							<option value="0">Dagaz</option>
+							<option value="24">Woden</option>
+						</select>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+    <div style="height:20px;"></div>
+	<p>張力比較：<input>
+	<br>解讀：<br><textarea rows="5" cols="40"></textarea></p>
+	</form>
+<div class="block"></div>
+<!--個案記錄，類型：抉擇牌陣-->
+<h1>符文占卜個案紀錄（抉擇牌陣）</h1>
+<hr size="5" width="300" align="left" color="lavender">
+	<form onsubmit="return false" oninput="GetSpread2()">
+	<p>占卜日期：<input type="date">
+	<br>個案編碼：<input placeholder="輸入自訂編號或代碼">
+	<br>問題摘要：<input placeholder="詢問者以及所詢問題">
+	<br>選項數量(N)：<select id="op" oninput="SetN()" onchange="SetN()"><option value="1">Please Select</option><option value="2">2</option><option value="3">3</option><option value="4">4</option></select>
+	<br><span style="font-size:10px;">至多4個選項，依據整體解讀決定N+1屬於建議或其他</span>
+	</p>
+	<div class="spread2" id="speadarea" style="display:none;">
+		<div class="cube" id="opa"><span id="opta"></span>
+			<div class="vcube">
+				<div class="output">
+					<img id="spreadRune5">
+					<p><select id="sp5">
+							<option value="1">Fehu</option>
+							<option value="2">Uruz</option>
+							<option value="3">Thurisaz</option>
+							<option value="4">Ansuz</option>
+							<option value="5">Raidho</option>
+							<option value="6">Kenaz</option>
+							<option value="7">Gebo</option>
+							<option value="8">Wunjo</option>
+							<option value="9">Hagalaz</option>
+							<option value="10">Naudhiz</option>
+							<option value="11">Isa</option>
+							<option value="12">Jera</option>
+							<option value="13">Eihwaz</option>
+							<option value="14">Perthro</option>
+							<option value="15">Algiz</option>
+							<option value="16">Sowilo</option>
+							<option value="17">Tiwaz</option>
+							<option value="18">Berkano</option>
+							<option value="19">Ehwaz</option>
+							<option value="20">Mannaz</option>
+							<option value="21">Laguz</option>
+							<option value="22">Ingwaz</option>
+							<option value="23">Othila</option>
+							<option value="0">Dagaz</option>
+							<option value="24">Woden</option>
+						</select>
+					</p>
+				</div>
+			</div>
+			<div class="vcube">
+				<div class="output">
+					<img id="spreadRune6">
+					<p><select id="sp6">
+							<option value="1">Fehu</option>
+							<option value="2">Uruz</option>
+							<option value="3">Thurisaz</option>
+							<option value="4">Ansuz</option>
+							<option value="5">Raidho</option>
+							<option value="6">Kenaz</option>
+							<option value="7">Gebo</option>
+							<option value="8">Wunjo</option>
+							<option value="9">Hagalaz</option>
+							<option value="10">Naudhiz</option>
+							<option value="11">Isa</option>
+							<option value="12">Jera</option>
+							<option value="13">Eihwaz</option>
+							<option value="14">Perthro</option>
+							<option value="15">Algiz</option>
+							<option value="16">Sowilo</option>
+							<option value="17">Tiwaz</option>
+							<option value="18">Berkano</option>
+							<option value="19">Ehwaz</option>
+							<option value="20">Mannaz</option>
+							<option value="21">Laguz</option>
+							<option value="22">Ingwaz</option>
+							<option value="23">Othila</option>
+							<option value="0">Dagaz</option>
+							<option value="24">Woden</option>
+						</select>
+					</p>
+				</div>
+			</div>
+		</div>
+		<div class="cube" id="opb"><span id="optb"></span>
+			<div class="vcube">
+				<div class="output">
+					<img id="spreadRune7">
+					<p><select id="sp7">
+							<option value="1">Fehu</option>
+							<option value="2">Uruz</option>
+							<option value="3">Thurisaz</option>
+							<option value="4">Ansuz</option>
+							<option value="5">Raidho</option>
+							<option value="6">Kenaz</option>
+							<option value="7">Gebo</option>
+							<option value="8">Wunjo</option>
+							<option value="9">Hagalaz</option>
+							<option value="10">Naudhiz</option>
+							<option value="11">Isa</option>
+							<option value="12">Jera</option>
+							<option value="13">Eihwaz</option>
+							<option value="14">Perthro</option>
+							<option value="15">Algiz</option>
+							<option value="16">Sowilo</option>
+							<option value="17">Tiwaz</option>
+							<option value="18">Berkano</option>
+							<option value="19">Ehwaz</option>
+							<option value="20">Mannaz</option>
+							<option value="21">Laguz</option>
+							<option value="22">Ingwaz</option>
+							<option value="23">Othila</option>
+							<option value="0">Dagaz</option>
+							<option value="24">Woden</option>
+						</select>
+					</p>
+				</div>
+			</div>
+			<div class="vcube">
+				<div class="output">
+					<img id="spreadRune8">
+					<p><select id="sp8">
+							<option value="1">Fehu</option>
+							<option value="2">Uruz</option>
+							<option value="3">Thurisaz</option>
+							<option value="4">Ansuz</option>
+							<option value="5">Raidho</option>
+							<option value="6">Kenaz</option>
+							<option value="7">Gebo</option>
+							<option value="8">Wunjo</option>
+							<option value="9">Hagalaz</option>
+							<option value="10">Naudhiz</option>
+							<option value="11">Isa</option>
+							<option value="12">Jera</option>
+							<option value="13">Eihwaz</option>
+							<option value="14">Perthro</option>
+							<option value="15">Algiz</option>
+							<option value="16">Sowilo</option>
+							<option value="17">Tiwaz</option>
+							<option value="18">Berkano</option>
+							<option value="19">Ehwaz</option>
+							<option value="20">Mannaz</option>
+							<option value="21">Laguz</option>
+							<option value="22">Ingwaz</option>
+							<option value="23">Othila</option>
+							<option value="0">Dagaz</option>
+							<option value="24">Woden</option>
+						</select>
+					</p>
+				</div>
+			</div>
+		</div>		
+		<div class="cube" id="opc"><span id="optc"></span>
+			<div class="vcube">
+				<div class="output">
+					<img id="spreadRune9">
+					<p><select id="sp9">
+							<option value="1">Fehu</option>
+							<option value="2">Uruz</option>
+							<option value="3">Thurisaz</option>
+							<option value="4">Ansuz</option>
+							<option value="5">Raidho</option>
+							<option value="6">Kenaz</option>
+							<option value="7">Gebo</option>
+							<option value="8">Wunjo</option>
+							<option value="9">Hagalaz</option>
+							<option value="10">Naudhiz</option>
+							<option value="11">Isa</option>
+							<option value="12">Jera</option>
+							<option value="13">Eihwaz</option>
+							<option value="14">Perthro</option>
+							<option value="15">Algiz</option>
+							<option value="16">Sowilo</option>
+							<option value="17">Tiwaz</option>
+							<option value="18">Berkano</option>
+							<option value="19">Ehwaz</option>
+							<option value="20">Mannaz</option>
+							<option value="21">Laguz</option>
+							<option value="22">Ingwaz</option>
+							<option value="23">Othila</option>
+							<option value="0">Dagaz</option>
+							<option value="24">Woden</option>
+						</select>
+					</p>
+				</div>
+			</div>
+			<div class="vcube">
+				<div class="output">
+					<img id="spreadRune10">
+					<p><select id="sp10">
+							<option value="1">Fehu</option>
+							<option value="2">Uruz</option>
+							<option value="3">Thurisaz</option>
+							<option value="4">Ansuz</option>
+							<option value="5">Raidho</option>
+							<option value="6">Kenaz</option>
+							<option value="7">Gebo</option>
+							<option value="8">Wunjo</option>
+							<option value="9">Hagalaz</option>
+							<option value="10">Naudhiz</option>
+							<option value="11">Isa</option>
+							<option value="12">Jera</option>
+							<option value="13">Eihwaz</option>
+							<option value="14">Perthro</option>
+							<option value="15">Algiz</option>
+							<option value="16">Sowilo</option>
+							<option value="17">Tiwaz</option>
+							<option value="18">Berkano</option>
+							<option value="19">Ehwaz</option>
+							<option value="20">Mannaz</option>
+							<option value="21">Laguz</option>
+							<option value="22">Ingwaz</option>
+							<option value="23">Othila</option>
+							<option value="0">Dagaz</option>
+							<option value="24">Woden</option>
+						</select>
+					</p>
+				</div>
+			</div>
+			<div class="vcube">
+				<div class="output">
+					<img id="spreadRune11">
+					<p>現況<br>
+						<select id="sp11">
+							<option value="1">Fehu</option>
+							<option value="2">Uruz</option>
+							<option value="3">Thurisaz</option>
+							<option value="4">Ansuz</option>
+							<option value="5">Raidho</option>
+							<option value="6">Kenaz</option>
+							<option value="7">Gebo</option>
+							<option value="8">Wunjo</option>
+							<option value="9">Hagalaz</option>
+							<option value="10">Naudhiz</option>
+							<option value="11">Isa</option>
+							<option value="12">Jera</option>
+							<option value="13">Eihwaz</option>
+							<option value="14">Perthro</option>
+							<option value="15">Algiz</option>
+							<option value="16">Sowilo</option>
+							<option value="17">Tiwaz</option>
+							<option value="18">Berkano</option>
+							<option value="19">Ehwaz</option>
+							<option value="20">Mannaz</option>
+							<option value="21">Laguz</option>
+							<option value="22">Ingwaz</option>
+							<option value="23">Othila</option>
+							<option value="0">Dagaz</option>
+							<option value="24">Woden</option>
+						</select>
+					</p>
+				</div>
+			</div>
+		</div>
+		<div class="cube" id="opd"><span id="optd"></span>
+			<div class="vcube">
+				<div class="output">
+					<img id="spreadRune12">
+					<p><select id="sp12">
+							<option value="1">Fehu</option>
+							<option value="2">Uruz</option>
+							<option value="3">Thurisaz</option>
+							<option value="4">Ansuz</option>
+							<option value="5">Raidho</option>
+							<option value="6">Kenaz</option>
+							<option value="7">Gebo</option>
+							<option value="8">Wunjo</option>
+							<option value="9">Hagalaz</option>
+							<option value="10">Naudhiz</option>
+							<option value="11">Isa</option>
+							<option value="12">Jera</option>
+							<option value="13">Eihwaz</option>
+							<option value="14">Perthro</option>
+							<option value="15">Algiz</option>
+							<option value="16">Sowilo</option>
+							<option value="17">Tiwaz</option>
+							<option value="18">Berkano</option>
+							<option value="19">Ehwaz</option>
+							<option value="20">Mannaz</option>
+							<option value="21">Laguz</option>
+							<option value="22">Ingwaz</option>
+							<option value="23">Othila</option>
+							<option value="0">Dagaz</option>
+							<option value="24">Woden</option>
+						</select>
+					</p>
+				</div>
+			</div>
+			<div class="vcube">
+				<div class="output">
+					<img id="spreadRune13">
+					<p><select id="sp13">
+							<option value="1">Fehu</option>
+							<option value="2">Uruz</option>
+							<option value="3">Thurisaz</option>
+							<option value="4">Ansuz</option>
+							<option value="5">Raidho</option>
+							<option value="6">Kenaz</option>
+							<option value="7">Gebo</option>
+							<option value="8">Wunjo</option>
+							<option value="9">Hagalaz</option>
+							<option value="10">Naudhiz</option>
+							<option value="11">Isa</option>
+							<option value="12">Jera</option>
+							<option value="13">Eihwaz</option>
+							<option value="14">Perthro</option>
+							<option value="15">Algiz</option>
+							<option value="16">Sowilo</option>
+							<option value="17">Tiwaz</option>
+							<option value="18">Berkano</option>
+							<option value="19">Ehwaz</option>
+							<option value="20">Mannaz</option>
+							<option value="21">Laguz</option>
+							<option value="22">Ingwaz</option>
+							<option value="23">Othila</option>
+							<option value="0">Dagaz</option>
+							<option value="24">Woden</option>
+						</select>
+					</p>
+				</div>
+			</div>
+		</div>
+		<div class="cube">N+1
+			<div class="vcube">
+				<div class="output">
+					<img id="spreadRune14">
+					<p><select id="sp14">
+							<option value="1">Fehu</option>
+							<option value="2">Uruz</option>
+							<option value="3">Thurisaz</option>
+							<option value="4">Ansuz</option>
+							<option value="5">Raidho</option>
+							<option value="6">Kenaz</option>
+							<option value="7">Gebo</option>
+							<option value="8">Wunjo</option>
+							<option value="9">Hagalaz</option>
+							<option value="10">Naudhiz</option>
+							<option value="11">Isa</option>
+							<option value="12">Jera</option>
+							<option value="13">Eihwaz</option>
+							<option value="14">Perthro</option>
+							<option value="15">Algiz</option>
+							<option value="16">Sowilo</option>
+							<option value="17">Tiwaz</option>
+							<option value="18">Berkano</option>
+							<option value="19">Ehwaz</option>
+							<option value="20">Mannaz</option>
+							<option value="21">Laguz</option>
+							<option value="22">Ingwaz</option>
+							<option value="23">Othila</option>
+							<option value="0">Dagaz</option>
+							<option value="24">Woden</option>
+						</select>
+					</p>
+				</div>
+			</div>
+			<div class="vcube">
+				<div class="output">
+					<img id="spreadRune15">
+					<p><select id="sp15">
+							<option value="1">Fehu</option>
+							<option value="2">Uruz</option>
+							<option value="3">Thurisaz</option>
+							<option value="4">Ansuz</option>
+							<option value="5">Raidho</option>
+							<option value="6">Kenaz</option>
+							<option value="7">Gebo</option>
+							<option value="8">Wunjo</option>
+							<option value="9">Hagalaz</option>
+							<option value="10">Naudhiz</option>
+							<option value="11">Isa</option>
+							<option value="12">Jera</option>
+							<option value="13">Eihwaz</option>
+							<option value="14">Perthro</option>
+							<option value="15">Algiz</option>
+							<option value="16">Sowilo</option>
+							<option value="17">Tiwaz</option>
+							<option value="18">Berkano</option>
+							<option value="19">Ehwaz</option>
+							<option value="20">Mannaz</option>
+							<option value="21">Laguz</option>
+							<option value="22">Ingwaz</option>
+							<option value="23">Othila</option>
+							<option value="0">Dagaz</option>
+							<option value="24">Woden</option>
+						</select>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+    <div style="height:20px;"></div>
+	<p>N+1：<input type="radio" name="n+1" style="width:20px;">對某選項的補充<input type="radio" name="n+1" style="width:20px;">隱藏的選項
+	<br>解讀：<br><textarea rows="5" cols="40"></textarea></p>
+	</form>
+<div class="block"></div>	
+	<script type="text/javascript">
+		var base_url = 'https://dl.dropboxusercontent.com/u/23843818/img/';
+		var Runetext = ([
+						["Dagaz", "Runic_letter_dagaz", "24"],	//餘數0就等於24
+						["Fehu", "Runic_letter_fehu", "1"],	//1
+						["Uruz", "Runic_letter_uruz", "2"],	//2
+						["Thurisaz", "Runic_letter_thurisaz", "3"],	//3
+						["Ansuz", "Runic_letter_ansuz", "4"],	//4
+						["Raidho", "Runic_letter_raido", "5"],	//5
+						["Kenaz", "Runic_letter_kenaz", "6"],	//6
+						["Gebo", "Runic_letter_gebo", "7"],	//7
+						["Wunjo", "Runic_letter_wunjo", "8"],	//8
+						["Hagalaz", "Runic_letter_haglaz", "9"],	//9
+						["Naudhiz", "Runic_letter_naudiz", "10"],	//10
+						["Isa", "Runic_letter_isa", "11"],	//11
+						["Jera", "Runic_letter_jera", "12"],	//12
+						["Eihwaz", "Runic_letter_iwaz", "13"],	//13
+						["Perthro", "Runic_letter_pertho", "14"],	//14
+						["Algiz", "Runic_letter_algiz", "15"],	//15
+						["Sowilo", "Runic_letter_sowilo", "16"],	//16	
+						["Tiwaz", "Runic_letter_tiwaz", "17"],	//17
+						["Berkano", "Runic_letter_berkano", "18"],	//18
+						["Ehwaz", "Runic_letter_ehwaz", "19"],	//19
+						["Mannaz", "Runic_letter_mannaz", "20"],	//20
+						["Laguz", "Runic_letter_laukaz", "21"],	//21
+						["Ingwaz", "Runic_letter_ingwaz", "22"],	//22
+						["Othila", "Runic_letter_othila", "23"],	//23
+						["Woden", "woden", "0"]	//0,數字25					
+						]);				
+		function SetN() {
+			var N = eval(op.value);
+			switch (N) {
+					case 2:
+						document.getElementById("speadarea").style.display = "";
+						document.getElementById("opa").style.visibility = "";
+						document.getElementById("opb").style.visibility = "hidden";
+						document.getElementById("opc").style.visibility = "";
+						document.getElementById("opd").style.visibility = "hidden";	
+						document.getElementById("opta").innerHTML = "A";
+						document.getElementById("optc").innerHTML = "B";
+						break;
+					case 3:
+						document.getElementById("speadarea").style.display = "";
+						document.getElementById("opa").style.visibility = "";
+						document.getElementById("opb").style.visibility = "";
+						document.getElementById("opc").style.visibility = "";
+						document.getElementById("opd").style.visibility = "hidden";
+						document.getElementById("opta").innerHTML = "A";
+						document.getElementById("optb").innerHTML = "B";
+						document.getElementById("optc").innerHTML = "C";								
+						break;
+					case 4:
+						document.getElementById("speadarea").style.display = "";
+						document.getElementById("opa").style.visibility = "";
+						document.getElementById("opb").style.visibility = "";
+						document.getElementById("opc").style.visibility = "";
+						document.getElementById("opd").style.visibility = "";	
+						document.getElementById("opta").innerHTML = "A";
+						document.getElementById("optb").innerHTML = "B";
+						document.getElementById("optc").innerHTML = "C";
+						document.getElementById("optd").innerHTML = "D";						
+						break;
+					default:
+						document.getElementById("speadarea").style.display = "none";			
+						break;
+				}
+			}
+		function GetDate()
+			{
+			var keydate,a=b=c=d=X=Y=0;
+			var keydate = inputdate.value.split("");
+			//計算年的相加
+			for (i=0; i<=3; i++) {
+				a+=eval(keydate[i]);
+				}
+			//計算月的相加
+			for (i=5; i<=6; i++) {
+				b+=eval(keydate[i]);
+				}
+			//計算日的相加
+			for (i=8; i<=9; i++) {
+				c+=eval(keydate[i]);
+				}
+			//取得日期的二位數
+			for (i=8; i<=9; i++) {
+				d+=keydate[i];
+				}
+			d%=24;
+			X = (a+b+c)%24;
+			Y = (b+c)%24;
+				document.getElementById("Rune1").value = Runetext[X][2] + '-' + Runetext[X][0];
+				document.getElementById("Rune2").value = Runetext[Y][2] + '-' + Runetext[Y][0];
+				document.getElementById("Rune3").value = Runetext[d][2] + '-' + Runetext[d][0];
+				document.getElementById("runeImg1").src = base_url + Runetext[X][1] + '.png';
+				document.getElementById("runeImg2").src = base_url + Runetext[Y][1] + '.png';
+				document.getElementById("runeImg3").src = base_url + Runetext[d][1] + '.png';	
+			}
+		function GetSpread()
+			{
+			var SPR1 = eval(sp1.value);
+			var SPR2 = eval(sp2.value);
+			var SPR3 = eval(sp3.value);
+			var SPR4 = eval(sp4.value);
+			document.getElementById("spreadRune1").src = base_url + Runetext[SPR1][1] + '.png';
+			document.getElementById("spreadRune2").src = base_url + Runetext[SPR2][1] + '.png';
+			document.getElementById("spreadRune3").src = base_url + Runetext[SPR3][1] + '.png';
+			document.getElementById("spreadRune4").src = base_url + Runetext[SPR4][1] + '.png';			
+			}
+		function GetSpread2()
+			{
+			var SPR5 = eval(sp5.value);
+			var SPR6 = eval(sp6.value);
+			var SPR7 = eval(sp7.value);
+			var SPR8 = eval(sp8.value);
+			var SPR9 = eval(sp9.value);
+			var SPR10 = eval(sp10.value);
+			var SPR11 = eval(sp11.value);
+			var SPR12 = eval(sp12.value);
+			var SPR13 = eval(sp13.value);
+			var SPR14 = eval(sp14.value);
+			var SPR15 = eval(sp15.value);
+			document.getElementById("spreadRune5").src = base_url + Runetext[SPR5][1] + '.png';
+			document.getElementById("spreadRune6").src = base_url + Runetext[SPR6][1] + '.png';
+			document.getElementById("spreadRune7").src = base_url + Runetext[SPR7][1] + '.png';
+			document.getElementById("spreadRune8").src = base_url + Runetext[SPR8][1] + '.png';	
+			document.getElementById("spreadRune9").src = base_url + Runetext[SPR9][1] + '.png';
+			document.getElementById("spreadRune10").src = base_url + Runetext[SPR10][1] + '.png';
+			document.getElementById("spreadRune11").src = base_url + Runetext[SPR11][1] + '.png';
+			document.getElementById("spreadRune12").src = base_url + Runetext[SPR12][1] + '.png';
+			document.getElementById("spreadRune13").src = base_url + Runetext[SPR13][1] + '.png';
+			document.getElementById("spreadRune14").src = base_url + Runetext[SPR14][1] + '.png';
+			document.getElementById("spreadRune15").src = base_url + Runetext[SPR15][1] + '.png';
+			}
+
+	</script>
+</body>
+</html>
